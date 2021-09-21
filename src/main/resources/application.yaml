@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:5432/link-converter?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&serverTimezone=Europe/Istanbul&useLegacyDatetimeCode=false
+    username: ${POSTGRESQL_USER:root}
+    password: ${POSTGRESQL_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 30
+        order_inserts: true
+        order_updates: true
+        format_sql: true
+        conneciton:
+          characterEncoding: utf-8
+          CharSet: utf-8
+          useUnicode: true
+  jackson:
+    default-property-inclusion: non_null
+server:
+  error:
+    include-message: always
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    context-path: /api

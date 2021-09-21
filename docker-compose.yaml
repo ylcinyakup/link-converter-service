@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  app:
+    container_name: link-converter-service
+    image: link-converter-service
+    build: .
+    environment:
+      - POSTGRESQL_HOST=link-converter-db
+      - POSTGRESQL_USER=root
+      - POSTGRESQL_PASSWORD=root
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - link-converter-db
+  link-converter-db:
+    container_name: link-converter-db
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - link-converter-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=link-converter
+    networks:
+      - app-network
+
+volumes:
+  link-converter-db:
+
+networks:
+  app-network:
+    driver: bridge
