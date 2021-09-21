@@ -1,1 +1,1 @@
-# link-converter-service
+docker-compose up --build
